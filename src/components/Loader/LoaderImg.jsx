@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const Rings = props => (
-  <svg
+export const Rings = ({ props })=> {
+  console.log(props)
+   return  <svg
     width={props.width}
     height={props.height}
     viewBox="0 0 45 45"
@@ -75,7 +76,7 @@ export const Rings = props => (
       </circle>
     </g>
   </svg>
-);
+}
 
 Rings.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -85,10 +86,3 @@ Rings.propTypes = {
   radius: PropTypes.number
 };
 
-Rings.defaultProps = {
-  height: 80,
-  width: 80,
-  color: "green",
-  radius: 6,
-  label: "audio-loading"
-};

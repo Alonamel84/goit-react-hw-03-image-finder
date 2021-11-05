@@ -1,8 +1,12 @@
-import { Rings } from './LoaderImg.jsx'
-const Loader = () => {
-   
+import LoaderIcon from "./LoaderIcon.jsx";
+const Loader = ({ onClick, onChange }) => {
+ 
     return (
-        <div> {Rings}</div>
+        <button type='button' onClick={onClick} onChange={ onChange}>Load More
+        {/* <LoaderIcon/> */}
+        </button>
+        
     )
 };
+
 export default Loader;

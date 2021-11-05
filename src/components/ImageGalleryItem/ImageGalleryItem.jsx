@@ -4,7 +4,8 @@ class ImageGalleryItem extends Component {
     state = {
         isModalOpen: false
     }
-    onToggleModal = () => {
+    onToggleModal = (e) => {
+        console.log(e)
         this.setState({ isModalOpen: !this.state.isModalOpen})
     }
 
@@ -12,24 +13,14 @@ class ImageGalleryItem extends Component {
         const { id, src, alt, largeImageURL } = this.props;
           return (
         
-        <li className="ImageGalleryItem" id={id} onClick={ this.onToggleModal}>
+              <li className="ImageGalleryItem"  id={id} onClick={ this.onToggleModal}>
             <img src={src} alt={ alt} className="ImageGalleryItem-image" />
-         {this.state.isModalOpen && <ModalWin  onClose={this.onToggleModal} hits={largeImageURL}/>}
+         {this.state.isModalOpen && <ModalWin onModalClose={this.onToggleModal} hits={largeImageURL}/>}
         </li >
             
  
     )
     }
 }
-// const ImageGalleryItem = ({ src, alt, id, showModal, largeImageURL, onClose }) => {
-//     return (
-        
-//         <li className="ImageGalleryItem" id={id} onClick={ onClose}>
-//             <img src={src} alt={ alt} className="ImageGalleryItem-image" />
-//          {showModal && <ModalWin  onClose={onClose} hits={largeImageURL}/>}
-//         </li >
-            
- 
-//     )
-// };
+
 export default ImageGalleryItem;

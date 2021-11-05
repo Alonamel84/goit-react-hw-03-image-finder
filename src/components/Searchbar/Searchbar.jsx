@@ -21,5 +21,8 @@ const Searchbar = ({onSubmit, valueInput, onChange}) => {
         </>
     )
 };
-
+Searchbar.propTypes = {
+  contact: PropTypes.array,
+  onSubmit: PropTypes.func,
+};
     export default Searchbar;

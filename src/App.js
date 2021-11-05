@@ -2,7 +2,7 @@ import './App.css';
 import './styles/styles.css';
 import Loader from './components/Loader';
 import Searchbar from './components/Searchbar';
-import { Rings } from './components/Loader/LoaderImg';
+import LoaderIcon from './components/Loader/LoaderIcon';
 import ImageGallery from './components/ImageGallery';
 import { getImages } from './api/api';
 import { Component } from 'react';
@@ -34,15 +34,21 @@ class App extends Component {
   getGallery = () => {
     this.setState({ isLoading: true });
     getImages(this.state.query, this.state.page)
-      .then(hits =>
-        this.setState(prevState => ({
-          hits: [...prevState.hits, ...hits],
-        })),
+      .then(
+        hits =>
+          this.setState(prevState => ({
+            hits: [...prevState.hits, ...hits],
+          })),
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth',
+        }),
       )
       .catch(err => this.setState({ error: err }))
       .finally(() => this.setState({ isLoading: false }));
   };
   handleChangePage = () => {
+    this.setState({ isLoading: true });
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
@@ -50,14 +56,17 @@ class App extends Component {
     const { hits, inputText } = this.state;
     return (
       <div className="App">
-        {this.state.isLoading && <div>{Rings}</div>}
         <Searchbar
           onSubmit={this.handleSubmit}
           valueInput={inputText}
           onChange={this.handleChange}
         />
+
         <ImageGallery hits={hits} />
-        {this.state.hits.length % 12 === 0 && <Loader />}
+        {this.state.isLoading && <LoaderIcon />}
+        {this.state.hits.length % 12 !== 0 && this.state.hits !== [] && (
+          <Loader onClick={this.handleChangePage} onChange={this.windowSkroll} />
+        )}
       </div>
     );
   }

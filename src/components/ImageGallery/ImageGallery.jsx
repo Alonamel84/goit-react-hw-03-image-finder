@@ -1,19 +1,22 @@
 import ImageGalleryItem from '../ImageGalleryItem'
+import PropTypes from 'prop-types';
 
-const ImageGallery = ({ children, hits, onClose }) => {
+const ImageGallery = ({ children, hits }) => {
     return (
         <ul className="ImageGallery" >
             {hits.map(item => (
                 <ImageGalleryItem
-                    onClose={onClose}
-                    key={item.id}
+                    key={item.webformatURL}
                     id={item.id}
                     src={item.webformatURL}
                     largeImageURL={item.largeImageURL}
                      alt={item.tags}
-                    // showModal={ showModal}
                 ></ImageGalleryItem >
             ))}</ul>
     )
+ 
+};
+   ImageGallery.propTypes = {
+  hits: PropTypes.array, 
 };
 export default ImageGallery;

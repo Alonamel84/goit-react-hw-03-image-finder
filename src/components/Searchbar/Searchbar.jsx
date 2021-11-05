@@ -1,4 +1,5 @@
 import Button from "../Button";
+import PropTypes from 'prop-types';
 
 const Searchbar = ({onSubmit, valueInput, onChange}) => {
     return (
@@ -22,7 +23,9 @@ const Searchbar = ({onSubmit, valueInput, onChange}) => {
     )
 };
 Searchbar.propTypes = {
-  contact: PropTypes.array,
-  onSubmit: PropTypes.func,
+  valueInput: PropTypes.string,
+    onSubmit: PropTypes.func,
+    onChange: PropTypes.func,
+ 
 };
     export default Searchbar;

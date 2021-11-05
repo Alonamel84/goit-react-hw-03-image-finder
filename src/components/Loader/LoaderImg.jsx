@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Rings = ({ props })=> {
-  console.log(props)
    return  <svg
     width={props.width}
     height={props.height}

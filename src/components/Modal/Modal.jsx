@@ -1,9 +1,10 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 export default class ModalWin extends Component {
   handleKeyDown = e => {
     e.preventDefault()
-    if (e.target !== e.currentTarget) {
-      console.log(e.target.nodeName !== "IMG")
+
+    if (e.target === e.currentTarget) {
         this.props.onModalClose()
       }
   }
@@ -12,12 +13,14 @@ export default class ModalWin extends Component {
   }
   componentDidMount() {
     window.addEventListener('keydown', this.closeByKey)
-    //  window.addEventListener('click', this.handleKeyDown)
-  
+    const body = document.querySelector('body');
+    body.style.overflow = "hidden";  
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.closeByKey)
-    //  window.addEventListener('click', this.handleKeyDown)
+     const body = document.querySelector('body');
+    body.style.overflow = "auto";
+    
   }
   render() {
     return (
@@ -28,4 +31,8 @@ export default class ModalWin extends Component {
       </div>
     )
   }
+};
+ModalWin.propTypes = {
+    hits: PropTypes.string,
+    onModalClose: PropTypes.func,
 };

@@ -1,20 +1,22 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 import ModalWin from "../Modal/Modal.jsx";
 class ImageGalleryItem extends Component {
     state = {
         isModalOpen: false
     }
-    onToggleModal = (e) => {
-        console.log(e)
-        this.setState({ isModalOpen: !this.state.isModalOpen})
+    onToggleModal = () => {
+        this.setState(({ isModalOpen }) => ({
+            isModalOpen: !isModalOpen
+        }))
     }
 
     render() {
         const { id, src, alt, largeImageURL } = this.props;
           return (
         
-              <li className="ImageGalleryItem"  id={id} onClick={ this.onToggleModal}>
-            <img src={src} alt={ alt} className="ImageGalleryItem-image" />
+              <li className="ImageGalleryItem"  id={id}>
+            <img src={src} alt={ alt}  onClick={ this.onToggleModal} className="ImageGalleryItem-image" />
          {this.state.isModalOpen && <ModalWin onModalClose={this.onToggleModal} hits={largeImageURL}/>}
         </li >
             
@@ -22,5 +24,13 @@ class ImageGalleryItem extends Component {
     )
     }
 }
+ ImageGalleryItem.propTypes = {
+     alt: PropTypes.string,
+     id: PropTypes.string,
+     largeImageURL: PropTypes.string,
+     onClose: PropTypes.func,
+     src: PropTypes.string,
+             
+};
 
 export default ImageGalleryItem;

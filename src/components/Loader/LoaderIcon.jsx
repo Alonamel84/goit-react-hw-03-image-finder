@@ -11,5 +11,5 @@ const LoaderIcon = () => {
       <div className='LoadMoreIcon'><Rings props={ringsProps} /></div>
            )
 };
-console.log('fdsfdsafadsf')
+
 export default LoaderIcon;

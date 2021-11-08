@@ -1,7 +1,7 @@
 import ImageGalleryItem from '../ImageGalleryItem'
 import PropTypes from 'prop-types';
 
-const ImageGallery = ({ children, hits }) => {
+const ImageGallery = ({  hits }) => {
     return (
         <ul className="ImageGallery" >
             {hits.map(item => (

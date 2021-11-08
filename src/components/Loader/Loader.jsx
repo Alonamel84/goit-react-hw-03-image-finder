@@ -1,9 +1,9 @@
-import LoaderIcon from "./LoaderIcon.jsx";
 import PropTypes from 'prop-types';
+import s from '../Loader/Loader.module.css'
 const Loader = ({ onClick, onChange }) => {
  
     return (
-        <button type='button' onClick={onClick} onChange={ onChange}>Load More
+        <button className={ s.loadMoreBtn}type='button' onClick={onClick} onChange={ onChange}>Load More
         </button>
         
     )

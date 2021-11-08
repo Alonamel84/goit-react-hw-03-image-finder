@@ -1,0 +1,9 @@
+.loadMoreBtn {
+  width: 200px;
+  height: 30px;
+  background-color: rgb(61, 48, 231);
+  margin: 0 auto;
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 18px;
+}

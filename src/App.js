@@ -11,7 +11,6 @@ class App extends Component {
   state = {
     hits: [],
     query: 'all',
-    inputText: '',
     page: 1,
     isLoading: false,
   };
@@ -22,50 +21,42 @@ class App extends Component {
     }
   }
 
-  handleChange = e => {
-    this.setState({ inputText: e.target.value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.setState({ query: this.state.inputText, page: 1, hits: [] });
+  handleSubmit = query => {
+    this.setState({ query: query, page: 1, hits: [] });
   };
 
   getGallery = () => {
     this.setState({ isLoading: true });
     getImages(this.state.query, this.state.page)
-      .then(
-        hits =>
-          this.setState(prevState => ({
-            hits: [...prevState.hits, ...hits],
-          })),
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: 'smooth',
-        }),
+      .then(hits =>
+        this.setState(prevState => ({
+          hits: [...prevState.hits, ...hits],
+        })),
       )
       .catch(err => this.setState({ error: err }))
-      .finally(() => this.setState({ isLoading: false }));
+      .finally(() => {
+        if (this.state.page >= 2) {
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth',
+          });
+        }
+        this.setState({ isLoading: false });
+      });
   };
   handleChangePage = () => {
-    this.setState({ isLoading: true });
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   render() {
-    const { hits, inputText } = this.state;
+    const { hits } = this.state;
     return (
       <div className="App">
-        <Searchbar
-          onSubmit={this.handleSubmit}
-          valueInput={inputText}
-          onChange={this.handleChange}
-        />
-
+        <Searchbar onSubmit={this.handleSubmit} />
         <ImageGallery hits={hits} />
         {this.state.isLoading && <LoaderIcon />}
-        {this.state.hits.length % 12 !== 0 && this.state.hits !== [] && (
-          <Loader onClick={this.handleChangePage} onChange={this.windowSkroll} />
+        {this.state.hits.length && this.state.hits !== [] && (
+          <Loader onClick={this.handleChangePage} onChange={this.getGallery} />
         )}
       </div>
     );
